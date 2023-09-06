@@ -1,20 +1,27 @@
 const URL = "https://jsonplaceholder.typicode.com/users";
-const form1 = document.querySelector('#form1');
 
 form1.addEventListener('submit', evento => {
     evento.preventDefault();
-    const datosForm = new FormData(form1);
+    let datos = {
+        "Nombre": document.querySelector('#nombre').value ,
+        "Apellido": document.querySelector('#apellido').value ,
+        "Fecha de nacimiento": document.querySelector('#fecha').value
+    };
 
     fetch(URL, {
         method: 'POST',
-        body: datosForm
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
     })
-    .then(respuesta => respuesta.json())
-    .then(usuario => {
-        console.log(JSON.parse(JSON.stringify(usuario)))
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
 
     })
 });
+
 
 
 
